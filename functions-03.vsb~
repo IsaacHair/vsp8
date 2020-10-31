@@ -1,0 +1,23 @@
+/7ff8-7fff: function stack pointer
+/7ff0-7ff7: sub-function id
+/7fe8-7fef: sub-function argument
+/7000-7fe7: global variables (includes pointers passed to function)
+/f000-ffff: function stack (for each function set, 0th byte is function id)
+/"1" bits are used in each of the following for the specified use:
+/8000: switching between function stack and global variables
+/0800: switching between path flag and path itself
+/7000: indicating the bit the path is editing (if all bits are 1, it is done)
+/07f8: value indexed based on pointer
+/0007: index to individual values of the byte by manually changing
+
+/reset sub-function id (only changing lowest 4 bits for now, more unneeded)
+0000 adr0 ffff 0001
+0001 adr1 7ff0 0002
+0002 buf0 0000 0003
+0003 adr1 0001 0004
+0004 buf0 0000 0005
+0005 adr1 0002 0006
+0006 buf0 0000 0007
+0007 adr0 0001 0008
+0008 buf0 0000 f000
+

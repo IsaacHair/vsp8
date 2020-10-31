@@ -1,0 +1,36 @@
+/has a pattern where led display fills up one by one
+/with "1" bits
+/display is wiped clean
+/then repeat with inverse colors, then regular
+
+/note: 1 = end of stack, 0 = not end
+/don't have to initailize stack; self-clears one by one
+
+/white dots on black:
+0000 adr0 ffff 0001
+0001 adr1 000f 0002
+0002 jmpr 0000 0004
+0004 out1 8000 0010
+0005 out1 8000 0100
+
+0010 out1 4000 0011
+0011 adr0 ffff 0012
+0012 adr1 000e 0013
+0013 jmpr 0000 0014
+0014 out0 8000 0020
+0015 out0 8000 0016
+0016 def1 000f 0000
+
+0020 out1 2000 0021
+0021 adr0 ffff 0022
+0022 adr1 000d 0023
+0023 jmpr 0000 0024
+0024 out0 4000 0030
+0025 out0 4000 0026
+0026 def1 000e 0000
+
+0030 out1 1000 0031
+0031 out0 2000 0032
+0032 def1 000d 0000
+
+

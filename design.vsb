@@ -1,0 +1,75 @@
+/has a pattern where led display fills up one by one
+/with "1" bits
+/display is wiped clean
+/then repeat with inverse colors, then regular
+
+/note: 1 = end of stack, 0 = not end
+/don't have to initailize stack; self-clears one by one
+
+/white dots on black:
+0000 adr0 ffff 0001
+0001 adr1 000f 0002
+0002 jmpr 0000 0004
+0004 out1 8000 0010
+0005 out1 8000 0100
+
+0010 out1 4000 0011
+0011 adr0 ffff 0012
+0012 adr1 000e 0013
+0013 jmpr 0000 0014
+0014 out0 8000 0020
+0015 out0 8000 0016
+0016 adr0 ffff 0017
+0017 adr1 000f 0018
+0018 buf1 0000 0000
+
+0020 out1 2000 0021
+0021 adr0 ffff 0022
+0022 adr1 000d 0023
+0023 jmpr 0000 0024
+0024 out0 4000 0030
+0025 out0 4000 0026
+0026 adr0 ffff 0027
+0027 adr1 000e 0028
+0028 buf1 0000 0000
+
+0030 out1 1000 0031
+0031 out0 2000 0032
+0032 adr0 ffff 0033
+0033 adr1 000d 0034
+0034 buf1 0000 0000
+
+
+/black dots on white:
+/note:everything, including flags, are inverted for this
+0100 adr0 ffff 0101
+0101 adr1 000f 0102
+0102 jmpr 0000 0104
+0104 out0 8000 0000
+0105 out0 8000 0110
+
+0110 out0 4000 0111
+0111 adr0 ffff 0112
+0112 adr1 000e 0113
+0113 jmpr 0000 0114
+0114 out1 8000 0116
+0115 out1 8000 0120
+0116 adr0 ffff 0117
+0117 adr1 000f 0118
+0118 buf0 0000 0100
+
+0120 out0 2000 0121
+0121 adr0 ffff 0122
+0122 adr1 000d 0123
+0123 jmpr 0000 0124
+0124 out1 4000 0126
+0125 out1 4000 0130
+0126 adr0 ffff 0127
+0127 adr1 000e 0128
+0128 buf0 0000 0100
+
+0130 out0 1000 0131
+0131 out1 2000 0132
+0132 adr0 ffff 0133
+0133 adr1 000d 0134
+0134 buf0 0000 0100

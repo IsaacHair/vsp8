@@ -1,0 +1,159 @@
+/*********** EXPLORATION IN FUNCTION/DRIVER DEFINITION AND USE **********
+
+/need better journaling
+/these comments are unintelligible unless you understand already
+
+/pathway for global variables (indexes to 8 bit sections):
+/"1" bits in 3800 are used for path
+/"1" bits in 4000 are used for path flags
+/"1" bits in 07f8 are the actual path indexes
+/"1" bits in 0007 are the bits to index within 8 bit area
+/path flags and values from 0000 to 6fff are wasted for creating path
+/note: 7000 is not needed since loading the last digit does not
+/require a path flag
+/so, all variables are stored from 7000 - 7fff
+/giving 2048 bits of ram or 256 bytes
+/note: immediate variables that are not indexed to
+/can be stored anywhere within the path
+/they will just be access with an immediate value instead of path
+
+/pathway for function variables (indexes to 8 bit sections):
+/same as previous path but 8000 at beginning of memory addresses
+/instead of 0000 at beginning
+
+/function calls
+/requires:
+/function to increment function stack pointer
+/function to decrement function stack pointer
+/procedure that calls function
+/setting procedure for function call id/number
+/return function to go back from function
+/note: procedures are re-written for each call, functions are not
+/global variables set aside:
+/7ff8 - 7fff for function stack pointer
+/function indicators are a part of the stack because full recursion requires
+/to know exactly where returning, might be different returns from same function
+/7fb0 - 7ff0 for values passed to function called (8 bytes)
+/note: since these values are all stored in the same location
+/functions that are called recursively or simply after other functions
+/will destroy the previous function's information
+/so the function must take these values and store it in the function pathway
+/since the pathway is indexed with the stack pointer
+/which will allow functions to have seperate memory
+/7ff0 - 7ff7 for return id of sub-functions that
+/increment, load, and decrement stack pointer
+
+/very important note
+/the building block functions that build every other function
+/which are described above under "required:"
+/note that this only applices to increment,
+/load, and decrement of stack pointer
+/have seperate function call indicators that are not stored on a stack
+/they cannot be used recursively because of this
+/but they are able to function in the first place as well
+/if they were placed on the stack, nothing would be able to define
+/how to use the stack
+/since the stack cannot be manipulated if the functions changing it
+/also rely on using it at the same exact time
+/note: you still have to set up return flags and everything for these functions
+/they can just be done entirely using immediate procedures instead of
+/external sub-functions
+/note: these functions can share the same address for return
+/since only one function is used at a time and none are nested
+
+/to call:
+/***call itself:
+/set this location return flag to 1
+/set function variables
+/jump to function
+/***flag set procedure:
+/call load stack pointer function
+/sets bits to correct flag
+/note: flags are stored in a high-density array
+/eg. array indexed to with 2 bits will store 4 bits of data
+/2^4 is 16, so the array can set the index to one of 16 locations
+/allows to set to correct value in o(nlog(n)) instructions
+/instead of n^2 instructions with simply setting and resetting all flags
+/since with that you have to define all flags at each call
+/and return in o(2n-1) instructions because nested if-else essentially
+/instead of return in n^2 instructions for previous scenario
+/and the return function call
+/note: this function is re-written for each function call
+/***function itself:
+/function increments stack pointer as offloads variables into array
+/for function variables if needed
+/function does stuff
+/function decrements stack pointer to original
+/and doesn't have to do anything to array
+/goes to return function
+/***increment pointer function:
+/uses path indexing to add 1 to pointer
+/***decrement pointer function:
+/uses path indexing to subtract 1 from pointer
+/***return function:
+/function cycles through possible return locations
+/until return flag at that locatino is 1,
+/in which case it will return there
+/this is done using nested if-elses to read each return flag bit
+/note: this is just defined once for the return section
+/***
+/note: helpful to combine the reset and return, etc in with each call
+/so you don't have to jump around and edit different code segments
+/actually: this is extremely difficult since
+/you don't know in advance which call is last
+/so you can't write jumps effectively
+/probably just create seperate sections
+
+/in compiler, useful to add in future:
+/"nest" statement, which takes a set of bits and
+/reads them in nested if-else
+/then either writes ram our output based on values in an array passed to nest
+/"path" to path index as usual
+/"define" to define macros
+/"call" to call a function and automatically
+/do the return flag indicator stuff
+
+/random example init
+0000 out0 ffff 0001
+0001 adr0 ffff 0002
+/note: in init, function stack pointer must be set to 00
+/using single change counting to save instructions
+0002 adr1 7ff8 0003
+0003 buf0 0000 0004
+0004 adr1 0001 0005
+0005 buf0 0000 0006
+0006 adr1 0002 0007
+0007 buf0 0000 0008
+0008 adr0 0001 0009
+0009 buf0 0000 000a
+000a adr1 0004 000b
+000b buf0 0000 000c
+000c adr0 0002 000d
+000d buf0 0000 000e
+000e adr1 0001 000f
+000f buf0 0000 0010
+0010 adr1 0002 0011
+0011 buf0 0000 0020
+
+/function call to output value at 7000 to lcd
+/this is function call number 00
+/this is sub-function call 00
+0020 adr0 ffff 0021
+0021 adr1 7ff0 0022
+0022 adr1 7ff0 0023
+0023 buf0 0000 0024
+0024 adr1 0001 0025
+0025 buf0 0000 0026
+0026 adr1 0002 0027
+0027 buf0 0000 0028
+0028 adr0 0001 0029
+0029 buf0 0000 002a
+002a adr1 0004 002b
+002b buf0 0000 002c
+002c adr0 0002 002d
+002d buf0 0000 002e
+002e adr1 0001 002f
+002f buf0 0000 0020
+0030 adr1 0002 0021
+0031 buf0 0000 f000 /go to stack pointer load function (stored at f000)
+/returning to set actual return id

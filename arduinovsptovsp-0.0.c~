@@ -1,0 +1,20 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+main(int argc, char* argv[]) {
+  FILE *source = fopen(argv[1], "r");
+  FILE *dump = fopen(argv[2], "w");
+  char c;
+  for (;1;) {
+    if ((c = fgetc(source)) == '\n')
+      fprintf(dump, "\n");
+    else if (c == ' ')
+      fprintf(dump, " ");
+    else if (c == '0')
+      if (((c = fgetc(source)) >=)
+	continue;
+      else
+	fprintf(dump, "0%c", c);
+    else if (c == '+')
+  }
+}

@@ -1,0 +1,454 @@
+    0000 adr0  0001 
+    0001 adr1 0000 0002
+    0002 buf1 0000 0003
+
+    0003 adr0  0004
+    0004 adr1 0001 0005
+    0005 buf1 0000 0006
+    
+    0006 adr0  0007
+    0007 adr1 0002 0008
+    0008 buf1 0000 0009
+
+    0009 adr0  000a
+    000a adr1 0003 000b
+    000b buf1 0000 000
+
+    000 adr0  00 
+    00 adr1 0000 00 
+    00 jmpr 0000 00
+    00 buf1 0000 00
+    00 buf0 0000 010
+
+    010 adr0  01
+    01 adr1 0001 01
+    01 jmpr 0000 01
+    01 buf1 0000 04
+    01 buf0 0000 020
+
+    020 adr0  02
+    02 adr1 0002 02
+    02 jmpr 0000 02
+    02 buf1 0000 08
+    02 buf0 0000 030
+
+    030 adr0  03
+    03 adr1 0003 03
+    03 jmpr 0000 03
+    03 buf1 0000 000
+    03 buf0 0000 000
+
+    00 out1 0000 01 
+    01 out1 0000 02
+    02 out1 0000 03
+    03 out1 0000 04
+    
+    04 out1 0000 05
+    05 out1 0000 06
+    06 out1 0000 07
+    07 out1 0000 08
+    
+    08 out1 0000 09
+    09 out1 0000 0a
+    0a out1 0000 0b
+    0b out1 0000 000
+
+    000 adr0  00 
+    00 adr1 00 00
+    00 buf0 0000 010
+
+    010 adr0  01 
+    01 adr1 0000 01
+    01 jmpr 0000 01
+    01 out1 0000 000
+    01 out1 0000 000
+
+    020 adr0  02
+    02 adr1 0001 02
+    02 jmpr 0000 02
+    02 out1 0000 000
+    02 out1 0000 000
+
+    030 adr0  03
+    03 adr1 0002 03
+    03 jmpr 0000 03
+    03 out1 0000 000
+    03 out1 0000 000
+
+    040 adr0  04
+    04 adr1 0003 04
+    04 jmpr 0000 04
+    04 out1 0000 000
+    04 out1 0000 000
+
+
+    000 adr0  00 
+    00 adr1 00 00
+    00 jmpr 0000 00
+    00 out1 0000 00 
+    00 out1 0000 00 
+
+    00 buf1 0000 00 
+    00 adr0  00
+    00 adr1 0 00
+    00 buf0 0000 00 
+    00 adr0  00
+    00 adr1 000 00
+    00 buf0 0000 020 
+
+    00 adr0 0 00
+    00 adr1 000 00
+    00 jmpr 0000 010 
+    010 adr0 0001 00
+    01 adr1 0001 00
+
+
+    00 adr0 0 01 
+    01 adr1 0 02
+    02 jmpr 0000 04
+    04 out1 0000 06 
+    05 out1 0000 0d 
+
+    06 buf1 0000 07 
+    07 adr0  08
+    08 adr1 0 09
+    09 buf0 0000 0a 
+    0a adr0  0b
+    0b adr1 010 0c
+    0c buf0 0000 030 
+
+    0d adr0 0 0e
+    0e adr1 010 0f
+    0f jmpr 0000 0 
+    0 adr0 0002 00
+     adr1 0002 00
+
+
+    00 adr0 0 01 
+    01 adr1 0 02
+    02 jmpr 0000 04
+    04 out1 0000 06 
+    05 out1 0000 0d 
+
+    06 buf1 0000 07 
+    07 adr0  08
+    08 adr1 0 09
+    09 buf0 0000 0a 
+    0a adr0  0b
+    0b adr1 020 0c
+    0c buf0 0000 040 
+
+    0d adr0 0 0e
+    0e adr1 020 0f
+    0f jmpr 0000 0 
+    0 adr0 0004 00
+     adr1 0004 00
+
+
+    00 adr0 0 01 
+    01 adr1 030 000
+
+
+    000 adr0  00 
+    00 adr1 00 00
+    00 jmpr 0000 00
+    00 out1 0000 00 
+    00 out1 0000 00 
+
+    00 buf1 0000 00 
+    00 adr0  00
+    00 adr1  00
+    00 buf0 0000 00 
+    00 adr0  00
+    00 adr1 000 00
+    00 buf1 0000 020 
+
+    00 adr0 0 00
+    00 adr1 000 00
+    00 jmpr 0000 010 
+    010 adr0 0001 00
+    01 adr1 0001 00
+
+
+    00 adr0 0 01 
+    01 adr1 0 02
+    02 jmpr 0000 04
+    04 out1 0000 06 
+    05 out1 0000 0d 
+
+    06 buf1 0000 07 
+    07 adr0  08
+    08 adr1  09
+    09 buf0 0000 0a 
+    0a adr0  0b
+    0b adr1 010 0c
+    0c buf1 0000 030 
+
+    0d adr0 0 0e
+    0e adr1 010 0f
+    0f jmpr 0000 0 
+    0 adr0 0002 00
+     adr1 0002 00
+
+
+    00 adr0 0 01 
+    01 adr1 0 02
+    02 jmpr 0000 04
+    04 out1 0000 06 
+    05 out1 0000 0d 
+
+    06 buf1 0000 07 
+    07 adr0  08
+    08 adr1  09
+    09 buf0 0000 0a 
+    0a adr0  0b
+    0b adr1 020 0c
+    0c buf1 0000 040 
+    
+    0d adr0 0 0e
+    0e adr1 020 0f
+    0f jmpr 0000 0 
+    0 adr0 0004 00
+     adr1 0004 00
+
+
+    00 adr0 0 01 
+    01 adr1 03 000
+
+
+    000 jmpi 0001 00
+    00 out1 0000 00 
+    00 out1 0000 00
+
+    00 buf0 0000 00 
+
+    00 jmpr 0000 00 
+    00 buf1  00 
+    00 buf0  00 
+
+
+    00 adr0  01 
+    01 adr1 0003 02 
+    02 jmpr 0000 04
+    04 adr0  0
+    05 adr0  0
+
+
+    0 adr0   
+     adr1 0002 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+    0 adr0  
+     adr1 0002 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+
+    0 adr0   
+     adr1 0001 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+    0 adr0  
+     adr1 0001 
+     jmpr 0000 
+     adr0  0
+     adr0  
+
+    0 adr0  
+     adr1 0001 
+     jmpr 0000 
+     adr0  
+     adr0  0
+
+    0 adr0  
+     adr1 0001 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+
+    0 adr0   
+     adr1 0000 
+     jmpr 0000 
+     adr0  00
+     adr0  01
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  02
+     adr0  03
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  04
+     adr0  05
+    
+     adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  06
+     adr0  07
+
+     adr0   
+     adr1 0000 
+     jmpr 0000 
+     adr0  08
+     adr0  09
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  0a
+     adr0  0b
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  0c
+     adr0  0d
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  0e
+     adr0  0f
+
+
+    00 out0 0001 000 
+    01 out0 0002 000
+    02 out0 0004 000
+    03 out0 0008 000
+    04 out0 000 000
+    05 out0 000 000
+    06 out0 000 000
+    07 out0 000 000
+
+    08 out0 0100 000
+    09 out0 0200 000
+    0a out0 0400 000
+    0b out0 0800 000
+    0c out0 000 000
+    0d out0 000 000
+    0e out0 000 000
+    0f out0 000 000
+
+
+
+    00 adr0  01 
+    01 adr1 0003 02 
+    02 jmpr 0000 04
+    04 adr0  0
+    05 adr0  0
+
+
+    0 adr0   
+     adr1 0002 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+    0 adr0  
+     adr1 0002 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+
+    0 adr0   
+     adr1 0001 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+    0 adr0  
+     adr1 0001 
+     jmpr 0000 
+     adr0  0
+     adr0  
+    
+    0 adr0  
+     adr1 0001 
+     jmpr 0000 
+     adr0  
+     adr0  0
+
+    0 adr0  
+     adr1 0001 
+     jmpr 0000 
+     adr0  0
+     adr0  0
+
+
+    0 adr0   
+     adr1 0000 
+     jmpr 0000 
+     adr0  00
+     adr0  01
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  02
+     adr0  03
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  04
+     adr0  05
+   
+     adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  06
+     adr0  07
+
+     adr0   
+     adr1 0000 
+     jmpr 0000 
+     adr0  08
+     adr0  09
+    
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  0a
+     adr0  0b
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  0c
+     adr0  0d
+
+    0 adr0  
+     adr1 0000 
+     jmpr 0000 
+     adr0  0e
+     adr0  0f
+
+
+    00 out1 0001 0000 
+    01 out1 0002 0000
+    02 out1 0004 0000
+    03 out1 0008 0000
+    04 out1 000 0000
+    05 out1 000 0000
+    06 out1 000 0000
+    07 out1 000 0000
+
+    08 out1 0100 0000
+    09 out1 0200 0000
+    0a out1 0400 0000
+    0b out1 0800 0000
+    0c out1 000 0000
+    0d out1 000 0000
+    0e out1 000 0000
+    0f out1 000 0000

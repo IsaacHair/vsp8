@@ -1,0 +1,94 @@
+/7ff8-7fff: function stack pointer
+/7ff0-7ff7: sub-function id
+/7fe8-7fef: sub-function argument
+/7800-7fe7: global variables (includes pointers passed to function)
+/f800-ffff: function stack (for each function set, 0th byte is function id)
+/"1" bits are used in each of the following for the specified use:
+/8000: switching between function stack and global variables
+/0800: switching between path flag and path itself (1 = flag, 0 = path)
+/7000: indicating the bit the path is editing (if at 7800+, at actual data)
+/07f8: value indexed based on pointer
+/0007: index to individual values of the byte by manually changing
+
+/no stack pointer reset needed since it can start anywhere and just wrap
+/reset sub-function id (only changing lowest 4 bits for now, more unneeded)
+0000 adr0 ffff 0001
+0001 adr1 7ff0 0002
+0002 buf0 0000 0003
+0003 adr1 0001 0004
+0004 buf0 0000 0005
+0005 adr1 0002 0006
+0006 buf0 0000 0007
+0007 adr0 0001 0008
+0008 buf0 0000 0009
+/go to stack load sub-function
+0009 out0 0000 f000
+
+/load-pointer sub-function
+/reset first flag (1 = written, 0 = not)
+f000 adr0 ffff f001
+f001 adr1 8800 f002
+f002 buf0 0000 f003
+/various loaders for each bit
+f003 adr0 ffff f004
+f004 adr1 7ff8 f020
+f005 adr0 ffff f006
+f006 adr1 7ff9 f020
+f007 adr0 ffff f008
+f008 adr1 7ffa f020
+f009 adr0 ffff f00a
+f00a adr1 7ffb f020
+f00b adr0 ffff f00c
+f00c adr1 7ffc f020
+f00d adr0 ffff f00e
+f00e adr1 7ffd f020
+f00f adr0 ffff f010
+f010 adr1 7ffe f020
+f011 adr0 ffff f012
+f012 adr1 7fff f020
+/switch to determine which segment to use
+f020 jmpr 0000 f022
+/segment to write 0
+f022 adr0 ffff f100 /note: all indexing is done using the ending 000 for path
+/segment to write 1
+f023 adr0 ffff f200
+
+/write 0
+/0th bit checking
+f100 adr1 8800 f102
+f102 jmpr 0000 f104
+/flag is 0
+/set flag to 1
+f104 buf1 0000 f106
+/set path value to 0
+f106 adr0 0800 f107
+f107 buf0 0000 f108
+/set upcoming flag to 0 (based on value written) and then check next bit
+f108 adr1 9800 f109
+f109 buf0 0000 f005
+/flag is 1
+/buffer path value and go to next bit writer
+f105 adr0 0800 f10a
+f10a jmpr 0000 f10c
+f10c adr0 0008 f110
+f10d adr1 0008 f110
+
+/1st bit checking
+f110 adr1 9800 f112
+f112 jmpr 0000 f114
+/flag is 0
+/set flag to 1
+f114 buf1 0000 f116
+/set path value to 0
+f116 adr0 0800 f117
+f117 buf0 0000 f118
+/set upcoming flag to 0 (based on value written) and then check next bit
+f118 adr1 1800 f119
+f119 buf0 0000 f007
+/flag is 1
+/buffer path value and go to next bit writer
+f115 adr0 0800 f11a
+f11a jmpr 0000 f11c
+f11c adr0 0008 f120
+f11d adr1 0008 f120
+
